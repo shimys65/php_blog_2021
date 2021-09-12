@@ -1,0 +1,30 @@
+<?php
+$dbConn = mysqli_connect("127.0.0.1", "root", "", "php_blog_2021") or die("DB CONNECTION ERROR");
+
+if (!isset($_GET['title'])) {
+  echo "title을 입력해 주세요";
+  exit;
+}
+
+if (!isset($_GET['body'])) {
+  echo "내용을 입력해 주세요";
+  exit;
+}
+
+$title = $_GET['title'];
+$body = $_GET['body'];
+
+$sql = "
+INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = '${title}', `body` = '${body}'
+";
+
+mysqli_query($dbConn, $sql);
+
+#echo "New record has id: " . mysqli_insert_id($dbConn);
+#exit;
+
+$id = mysqli_insert_id($dbConn);
+?>
+<div><?=$id?>번 게시물이 생성되었습니다.</div>
+<div><a href="detail.php?id=<?=$id?>">생성된 게시물</a></div>
+<div><a href="list.php">리스트</a></div>
