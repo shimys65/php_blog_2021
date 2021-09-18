@@ -25,7 +25,10 @@ while ( $article = mysqli_fetch_assoc($rs) ) {
 <body>
   <h1>게시물 리스트</h1>
   <hr>
-
+  <div>
+    <a href="write.php">글 작성</a>
+  </div>
+  <hr>
   <div>
     <?php foreach ( $articles as $article ) { ?>
       <?php
@@ -35,7 +38,8 @@ while ( $article = mysqli_fetch_assoc($rs) ) {
       작성 : <?=$article['regDate']?><br>
       수정 : <?=$article['updateDate']?><br>
       <a href="<?=$detailUri?>">제목 : <?=$article['title']?></a><br>
-      <hr>
+      내용 : <?=$article['body']?></a><br>
+    <hr>
     <?php } ?>
   </div>
 </body>

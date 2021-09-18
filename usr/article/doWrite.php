@@ -25,6 +25,7 @@ mysqli_query($dbConn, $sql);
 
 $id = mysqli_insert_id($dbConn);
 ?>
-<div><?=$id?>번 게시물이 생성되었습니다.</div>
-<div><a href="detail.php?id=<?=$id?>">생성된 게시물</a></div>
-<div><a href="list.php">리스트</a></div>
+<script>
+alert('<?=$id?>번 게시물이 생성되었습니다.');
+location.replace('detail.php?id=<?=$id?>');
+</script>
