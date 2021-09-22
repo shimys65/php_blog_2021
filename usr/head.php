@@ -10,3 +10,7 @@
 <body>
   <h1><?=$pageTitle?></h1>
   <hr>
+  <?php if ( isset($_SESSION['loginedMemberId']) ) { ?>
+  <a href="../member/doLogout.php">로그아웃</a>
+  <!-- unset($_SESSION); -->
+  <?php } ?>
