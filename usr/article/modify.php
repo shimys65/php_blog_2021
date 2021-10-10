@@ -1,20 +1,17 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/webInit.php';
 
-if ( isset($_GET['id']) == false ) {
-  echo "id를 입력해주세요.";
-  exit;
+$id = getIntValueOr($_GET['id'], 0);
+
+if ( $id == 0 ) {
+  jsHistoryBackExit("번호를 입력해주세요.");
 }
 
-$id = intval($_GET['id']);
-
-$sql = "
-SELECT *
-FROM article AS A
-WHERE A.id = '${id}'
-";
-$rs = mysqli_query($dbConn, $sql);
-$article = mysqli_fetch_assoc($rs);
+$sql = DB__secSql();
+$sql->add("SELECT *");
+$sql->add("FROM article AS A");
+$sql->add("WHERE A.id = ?", $id);
+$article = DB__getRow($sql);
 
 if ( $article == null ) {
   echo "${id}번 게시물은 존재하지 않습니다.";

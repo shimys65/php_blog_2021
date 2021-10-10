@@ -1,18 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/webInit.php';
 
-$sql = "
-SELECT *
-FROM article AS A
-ORDER BY A.id DESC
-";
-
-$rs = mysqli_query($dbConn, $sql);
-$articles = [];
-
-while ( $article = mysqli_fetch_assoc($rs) ) {
-  $articles[] = $article;
-}
+$sql = DB__secSql();
+$sql->add("SELECT *");
+$sql->add("FROM article AS A");
+$sql->add("ORDER BY A.id DESC");
+$articles = DB__getRows($sql);
 ?>
 <?php
 $pageTitle = "게시물 리스트";
