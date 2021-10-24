@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/webInit.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../webInit.php';
 
 if ( isset($_GET['loginId']) == false ) {
   echo "loginId를 입력해주세요.";

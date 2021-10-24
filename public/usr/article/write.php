@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/webInit.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../webInit.php';
 
 $pageTitle = "게시물 작성";
 ?>

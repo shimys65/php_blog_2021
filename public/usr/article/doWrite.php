@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/webInit.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../webInit.php';
 
 /*
 if (!isset($_GET['title'])) {
