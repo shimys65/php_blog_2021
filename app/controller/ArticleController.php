@@ -6,13 +6,9 @@ class APP__UsrArticleController { //콘트롤러는 서비스 클래스에 요�
     $this -> articleService = new APP__ArticleService;
   }
 
-  public static function getViewPath($viewName) {
-    return $_SERVER['DOCUMENT_ROOT'] . '/' . $viewName . '.view.php'; 
-  }
-
   // 1. write.php를 처리하기 위한 함수.
   public function actionShowWrite() {
-    require_once static::getViewPath("usr/article/write");
+    require_once App__getViewPath("usr/article/write");
   }
 
   public function actionDoWrite() {
@@ -66,7 +62,7 @@ class APP__UsrArticleController { //콘트롤러는 서비스 클래스에 요�
                 exit; */
 
                 //출력을 위해 list.view.php를 require를 사용 연결 함.   
-    require_once static::getViewPath("usr/article/list");
+    require_once App__getViewPath("usr/article/list");
   }
 
   // 3. detail.php를 처리하기 위한 함수.
@@ -83,7 +79,7 @@ class APP__UsrArticleController { //콘트롤러는 서비스 클래스에 요�
       jsHistoryBackExit("${id}번 게시물은 존재하지 않습니다.");
     }
 
-    require_once static::getViewPath("usr/article/detail");
+    require_once App__getViewPath("usr/article/detail");
   }
 
   public function actionShowModify() {

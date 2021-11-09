@@ -1,12 +1,28 @@
 <?php
-require_once __DIR__ . '/app/ArticleRepository.php';
-require_once __DIR__ . '/app/ArticleService.php';
-require_once __DIR__ . '/app/ArticleController.php';
+require_once __DIR__ . '/app/repository/MemberRepository.php';
+require_once __DIR__ . '/app/repository/ArticleRepository.php';
 
-function runApp($action) {
-  /*다음 코드 전체는 list.php에서 사용했던 아래 두 라인의 코드를 대체하기위해 함수 runApp을 만들고 짜여진 코드 
+require_once __DIR__ . '/app/service/MemberService.php';
+require_once __DIR__ . '/app/service/ArticleService.php';
+
+require_once __DIR__ . '/app/controller/MemberController.php';
+require_once __DIR__ . '/app/controller/ArticleController.php';
+
+function App__getViewPath($viewName) {
+  return __DIR__ . '/public/' . $viewName . '.view.php';
+}
+
+function App__run($action) {
+  /*다음 코드 전체는 list.php에서 사용했던 아래 두 라인의 코드를 대체하기위해 함수 runApp을 만들고 짜여진 코드
+  코드의 $usrArticleController = new $controllerClassName();는 아래 코드로 변환
   $usrArticleController = new APP__UsrArticleController();
+
+  코드의 $usrArticleController->$actionMethodName();은 아래 코드로 변환, 만들어진 인스탄스에의해 
+  actionShowList() 함수 실행
   $usrArticleController -> actionShowList();
+
+  require_once __DIR__ . '/app/controller/ArticleController.php';에 의해 
+  /app/controller/ArticleController.php에서 실행되며 이것이 없으명 에러
   */
   list($controllerTypeCode, $controllerName, $actionFuncName) = explode('/', $action);
 
@@ -23,8 +39,7 @@ function runApp($action) {
     $actionMethodName .= "Show" . ucfirst($actionFuncName);
   }
 
-  $usrArticleController = new $controllerClassName(); //new APP__UsrArticleController과 같음
+  $usrArticleController = new $controllerClassName(); //new APP__UsrArticleController()와 같음
   $usrArticleController->$actionMethodName(); // actionShowList()와 같음
 }
 ?>
-
