@@ -3,7 +3,8 @@ class APP__UsrMemberController { //콘트롤러는 서비스 클래스에 요청
   private APP__MemberService $memberService; //서비스 구조를 갖는 변수
 
   public function __construct() { //서비스 변수 인스턴스 생성    
-    $this -> memberService = new APP__MemberService;
+    global $App__memberService;
+    $this->memberService = $App__memberService;
   }
 
   public static function getViewPath($viewName) {

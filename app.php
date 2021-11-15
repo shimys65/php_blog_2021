@@ -8,12 +8,63 @@ require_once __DIR__ . '/app/service/ArticleService.php';
 require_once __DIR__ . '/app/controller/MemberController.php';
 require_once __DIR__ . '/app/controller/ArticleController.php';
 
+require_once __DIR__ . '/app/global.php';
+
 function App__getViewPath($viewName) {
   return __DIR__ . '/public/' . $viewName . '.view.php';
 }
 
+function App__runBeforActionInterCeptor() {
+  /*
+  global $isLogined;
+  global $loginedMemberId;
+  global $loginedMember;
+  global $App__memberService;
+
+  global $App__isLogined;
+  global $App__loginedMemberId;
+  global $App__loginedMember;
+  */
+
+  if ( isset($_SESSION['loginedMemberId']) ) {
+    /*
+    $isLogined = true;
+    $loginedMemberId = intval($_SESSION['loginedMemberId']);
+    $memberService = new APP__MemberService();
+    $loginedMember = $memberService->getForPrintMemberById($loginedMemberId);
+    */
+    $App__isLogined = true;
+    $App__loginedMemberId = intval($_SESSION['loginedMemberId']);
+    $App__loginedMember = $App__memberService->getForPrintMemberById($App__loginedMemberId);
+  }
+}
+
+function App__runInterceptors() {
+  App__runBeforActionInterCeptor();
+}
+
+function App__runAction(string $action) {
+  list($controllerTypeCode, $controllerName, $actionFuncName) = explode('/', $action);
+  $controllerClassName = "APP__" . ucfirst($controllerTypeCode) . ucfirst($controllerName) . "Controller";
+  $actionMethodName = "action";
+  if ( str_starts_with($actionFuncName, "do") ) {
+    $actionMethodName .= ucfirst($actionFuncName);
+  }
+  else {
+    $actionMethodName .= "Show" . ucfirst($actionFuncName);
+  }
+  $usrArticleController = new $controllerClassName();
+  $usrArticleController->$actionMethodName();
+}
+
+function App__run(string $action) {
+  App__runInterceptors();
+  App__runAction($action);  
+}
+
+/*
 function App__run($action) {
-  /*다음 코드 전체는 list.php에서 사용했던 아래 두 라인의 코드를 대체하기위해 함수 runApp을 만들고 짜여진 코드
+  다음 코드 전체는 list.php에서 사용했던 아래 두 라인의 코드를 대체하기위해 함수 runApp을 만들고 짜여진 코드
   코드의 $usrArticleController = new $controllerClassName();는 아래 코드로 변환
   $usrArticleController = new APP__UsrArticleController();
 
@@ -23,7 +74,7 @@ function App__run($action) {
 
   require_once __DIR__ . '/app/controller/ArticleController.php';에 의해 
   /app/controller/ArticleController.php에서 실행되며 이것이 없으명 에러
-  */
+
   list($controllerTypeCode, $controllerName, $actionFuncName) = explode('/', $action);
 
 // usr/article/list가 들어오면 APP__UsrArticleController로 변하여 controllerClassName에 저장
@@ -43,3 +94,4 @@ function App__run($action) {
   $usrArticleController->$actionMethodName(); // actionShowList()와 같음
 }
 ?>
+*/

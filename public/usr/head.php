@@ -1,17 +1,12 @@
 <?php
-$isLogined = false;
-$loginedMemberId = 0;
-$loginedMember = null;
-
-if ( isset($_SESSION['loginedMemberId']) ) {
-  $loginedMemberId = intval($_SESSION['loginedMemberId']);
-  $isLogined = true;
-  $sql = DB__secSql();
-  $sql->add("SELECT M.*");
-  $sql->add("FROM `member` AS M");
-  $sql->add("WHERE M.id = ?", $loginedMemberId);
-  $loginedMember = DB__getRow($sql);
-}
+/*
+$isLogined = $GLOBALS['isLogined'];
+$loginedMemberId = $GLOBALS['loginedMemberId'];
+$loginedMember = $GLOBALS['loginedMember'];
+*/
+$isLogined = $GLOBALS['App__isLogined'];
+$loginedMemberId = $GLOBALS['App__loginedMemberId'];
+$loginedMember = $GLOBALS['App__loginedMember'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

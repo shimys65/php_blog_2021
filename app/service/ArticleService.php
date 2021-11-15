@@ -3,7 +3,8 @@ class APP__ArticleService { //콘트롤러에서 요청한 서비스 처리위�
   private APP__ArticleRepository $articleRepository; //리포지터리 구조를 갖는 변수
 
   public function __construct() { //리포지터리 변수 인스턴스 생성    
-    $this -> articleRepository = new APP__ArticleRepository;
+    global $App__articleRepository;
+    $this->articleRepository = $App__articleRepository;
   }
   public function getForPrintArticles(): array {
     return $this -> articleRepository -> getForPrintArticles();

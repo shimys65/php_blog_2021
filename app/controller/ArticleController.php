@@ -3,7 +3,8 @@ class APP__UsrArticleController { //콘트롤러는 서비스 클래스에 요�
   private APP__ArticleService $articleService; //서비스 구조를 갖는 변수
 
   public function __construct() { //서비스 변수 인스턴스 생성    
-    $this -> articleService = new APP__ArticleService;
+    global $App__articleService;
+    $this->articleService = $App__articleService;
   }
 
   // 1. write.php를 처리하기 위한 함수.
